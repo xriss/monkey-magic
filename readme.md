@@ -14,4 +14,9 @@ Improve crunchyroll extension primarily needed to force the video
 player fullscreen when you select an episode for a better TV 
 experience. 
 
+https://greasyfork.org/en/scripts/391272-crunchyroll-auto-fullscreen 
+also seems to be needed so that we do not have a silly bar at the top 
+of the video player screen by default.
+
+
 Ok HAVCE FUNM GOODLUK KAIBAI!
