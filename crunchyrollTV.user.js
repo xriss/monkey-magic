@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Crunchyroll TV
 // @namespace    https://github.com/xriss/monkey-magic
-// @version      1.250602.1
+// @version      1.250602.3
 // @description  Arrow key navigation of Crunchyroll site.
 // @author       Qwyzz
 // @match        https://*.crunchyroll.com/*
@@ -16,6 +16,13 @@
 
 	.TVHAX-hide { display : none ; }
 	.TVHAX-focus { border : 1px solid white ; }
+
+/* hide the menu since we cant operate it */
+	[class^='app-layout__header'] { display : none ; }
+	
+	.video-player-spacer { max-height : 100vh !important ; }
+
+	html { scrollbar-width: none; }
 
 	`
 
@@ -56,10 +63,6 @@
 
 	let navi=function(dir)
 	{
-		// remove elements we do not want to see
-//        let e=document.getElementsByClassName('erc-feed')[0]
-//        e=e&&e.firstElementChild
-//        if(e) { e.classList.add("TVHAX-hide") }
 
 		// find all elements we might want to focus
 		let es=Array.from(document.getElementsByTagName("a"))
@@ -145,9 +148,9 @@
 				let ddir=getdir(dpos)
 				let dprp=getprp(dpos)
 
-				if( ddir > edge ) // MUST be in this direction
+				if( ddir > edge ) // MUST be in this direction and past the edge of this element so we dont get stuck
 				{
-					if( Math.abs(ddir)*0.25 >= Math.abs(dprp) ) // not too big an angle
+					if( Math.abs(ddir)*0.5 >= Math.abs(dprp) ) // not too big an angle
 					{
 						if( Math.abs(ddir*dprp) <= Math.abs( window.innerWidth*window.innerHeight) ) // not too big a distance
 						{
@@ -195,9 +198,9 @@
 			}
 
 //            console.log(best)
-			best.classList.add("TVHAX-focus")
+//			best.classList.add("TVHAX-focus")
+			best.scrollIntoView({ behavior: "instant", block: "nearest", inline: "nearest" })
 			best.focus()
-			best.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" })
 		}
 	}
 // need to listen for keys
