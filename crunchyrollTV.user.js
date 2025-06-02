@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Crunchyroll TV
 // @namespace    https://github.com/xriss/monkey-magic
-// @version      2025-06-02.1
+// @version      1.250602.1
 // @description  Arrow key navigation of Crunchyroll site.
 // @author       Qwyzz
 // @match        https://*.crunchyroll.com/*
