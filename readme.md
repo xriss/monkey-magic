@@ -10,13 +10,6 @@ CrunchyRoll pages. This is intended to allow you to operate the site
 with a simple Fire TV Remote or similar on a big screen. 
 
 https://chromewebstore.google.com/detail/improve-crunchyroll/elmhfjhlecffodalffipmgpploaihjgh 
-Improve crunchyroll extension primarily needed to force the video 
-player fullscreen when you select an episode for a better TV 
-experience. 
-
-https://greasyfork.org/en/scripts/391272-crunchyroll-auto-fullscreen 
-also seems to be needed so that we do not have a silly bar at the top 
-of the video player screen by default.
-
+Improve crunchyroll extension maybe? Not sure this really helps.
 
 Ok HAVCE FUNM GOODLUK KAIBAI!
