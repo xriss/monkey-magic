@@ -1,10 +1,10 @@
 // ==UserScript==
-// @name         Crunchyroll TV
+// @name         Amazon Video TV
 // @namespace    https://github.com/xriss/monkey-magic
-// @version      1.250602.3
-// @description  Arrow key navigation of Crunchyroll site.
+// @version      1.250601.1
+// @description  Arrow key navigation of Amazon Video site.
 // @author       Qwyzz
-// @match        https://*.crunchyroll.com/*
+// @match        https://www.amazon.co.uk/gp/video/*
 // @icon         data:image/gif;base64,R0lGODlhIAAgAPABAP///wAAACH/C05FVFNDQVBFMi4wAwEAAAAh+QQFCAABACwAAAAAIAAgAAACPYyPqcvtD6OctNqLs36g+w8CVEh6Y0meKIiVW+BusTZXa6jeXa7zd874ABfCSVFxjCQRy5fzCY1Kp9TqogAAOw==
 // @grant        none
 // ==/UserScript==
@@ -17,12 +17,10 @@
 	.TVHAX-hide { display : none ; }
 	.TVHAX-focus { border : 1px solid white ; }
 
-/* hide the menu since we cant operate it */
-	[class^='app-layout__header'] { display : none ; }
-	
-	.video-player-spacer { max-height : 100vh !important ; }
-
 	html { scrollbar-width: none; }
+	
+	#pv-navigation-bar { display : none ; }
+	#navbar-main { display : none ; }
 
 	`
 
@@ -67,48 +65,10 @@
 		// find all elements we might want to focus
 		let es=Array.from(document.getElementsByTagName("a"))
 		.concat( Array.from(document.getElementsByTagName("button")) )
-		.concat( Array.from(document.getElementsByTagName("div")) )
-		.filter(function(e){return e.getAttribute("tabindex")=="0"})
-		.filter(function(e){return !e.classList.contains("as")})
-		// remove some more dodgy ones
-		for( let idx=es.length-1 ; idx>=0 ; idx-- )
-		{
-			let e=es[idx]
-			let keep=true
+		.filter(function(e){return e.getAttribute("tabindex")=="-1" })
+		.filter(function(e){return e.getAttribute("role")!="tab" })
+		.concat( Array.from(document.querySelectorAll(".fbl-play-btn")) ) 
 
-			for (const v of e.classList.values() )
-			{
-				for( let s of
-					[
-					"user-menu",
-					"menu-item",
-					"erc-menu",
-					"browse-menu",
-					"browse-submenu",
-				] )
-				{
-					if( v.startsWith(s) ) // these are invisible and muck up the navigation
-					{
-						keep=false
-					}
-				}
-
-				for( let p=e.parentElement ; p.parentElement ; p=p.parentElement )
-				{
-					for (const v of p.classList.values() )
-					{
-						if( v.startsWith("header-") ) // keep away from header
-						{
-							keep=false
-						}
-					}
-				}
-			}
-			if(!keep)
-			{
-				es.splice(idx,1)
-			}
-	   }
 
 		let apos=[0,0]
 		if( document.activeElement ) { apos=getpos(document.activeElement) }
@@ -134,7 +94,7 @@
 			let getprp=function(a) { return a[0]*prp[0] + a[1]*prp[1] }
 
 			let apos=getpos(best)
-			let edge = Math.max( 0 , getdir( getmin(best) ) , getdir( getmax(best) ) )
+//			let edge = Math.max( 0 , getdir( getmin(best) ) , getdir( getmax(best) ) )
 
 			let adj=null
 			let adj_dd=Number.MAX_VALUE
@@ -148,7 +108,7 @@
 				let ddir=getdir(dpos)
 				let dprp=getprp(dpos)
 
-				if( ddir > edge ) // MUST be in this direction and past the edge of this element so we dont get stuck
+				if( ddir > 0 ) // MUST be in this direction
 				{
 					if( Math.abs(ddir)*2 >= Math.abs(dprp) ) // not too big an angle
 					{
@@ -185,20 +145,8 @@
 
 		if(best)
 		{
-			// dont select child elements?
-			for( let e of es)
-			{
-				if( posinside(e,getpos(best)) )
-				{
-					if( getsiz(e) > getsiz(best) )
-					{
-						best=e
-					}
-				}
-			}
-
 //            console.log(best)
-//			best.classList.add("TVHAX-focus")
+			best.classList.add("TVHAX-focus")
 			best.scrollIntoView({ behavior: "instant", block: "nearest", inline: "nearest" })
 			best.focus()
 		}
@@ -220,7 +168,23 @@
 		if( (e.code=="Escape") || (e.code=="Back")  )
 		{
 			mine=true
-			history.back()
+			
+			let ec=document.querySelector("[aria-label='Close Player']")
+			if(ec)
+			{
+				if( ec.checkVisibility() )
+				{
+					ec.click()
+				}
+				else
+				{
+					history.back()
+				}
+			}
+			else
+			{
+				history.back()
+			}
 		}
 		if( (e.code=="Enter")  || (e.code=="Space") )
 		{
