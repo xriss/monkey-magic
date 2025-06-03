@@ -12,4 +12,10 @@ the top menu bar as you can not operate it with these keys and try to
 maximise the video player including hiding scrollbars.
 
 
+https://github.com/xriss/monkey-magic/raw/refs/heads/main/amazonvideoTV.user.js 
+Use arrow key movement and select(enter) / back(esc) for navigation of 
+amazon video pages. This is intended to allow you to operate the site 
+with a simple Fire TV Remote or similar on a big screen.
+
+
 Ok HAVCE FUNM GOODLUK KAIBAI!
