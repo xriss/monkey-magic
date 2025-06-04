@@ -14,8 +14,10 @@ maximise the video player including hiding scrollbars.
 
 https://github.com/xriss/monkey-magic/raw/refs/heads/main/amazonvideoTV.user.js 
 Same HAX as the crunchy roll but for amazon prime video. Not sure about 
-the URL to trigger it as amazon changes it per country so can only test 
-the UK version.
+the URL to trigger it as amazon changes it per country so I can only 
+test the UK version. The season selector is not currently working since 
+it is a dynamic dropdown which needs some more serious hax to deal 
+with.
 
 
 Ok HAVCE FUNM GOODLUK KAIBAI!
