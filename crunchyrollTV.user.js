@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Crunchyroll TV
 // @namespace    https://github.com/xriss/monkey-magic
-// @version      1.250603.2
+// @version      1.250604.1
 // @description  Arrow key navigation of Crunchyroll site.
 // @author       Qwyzz
 // @match        https://*.crunchyroll.com/*
@@ -204,21 +204,6 @@
 
 		if(best)
 		{
-			// dont select child elements?
-/*
-			for( let e of es)
-			{
-				if( posinside(e,getpos(best)) )
-				{
-					if( getsiz(e) > getsiz(best) )
-					{
-						best=e
-					}
-				}
-			}
-*/
-
-//            console.log(best)
 			if(best) { focus=best }
 			if(focus)
 			{
@@ -230,7 +215,6 @@
 	}
 // need to listen for keys
 	document.addEventListener("keydown", function(e) {
-//        console.log(e)
 
 		let mine=false
 
